@@ -28,3 +28,11 @@ ON DELETE NO ACTION ---> error
 ON DELETE CASCADE --->  Delete the photo too!
 ON DELETE SET NULL --> set the 'user_id' of the photo to 'null'
 ON DELETE SET DEFAULT ---> set the 'user_Id' of the photo to a default value, if one is provided
+
+# Joins
+- Produces values by merging together rows from different related tables
+- Use a join most times that you are asked to find data that involves multiple resources
+
+# Aggregation
+- Looks at many rows and calculates a single value
+- Words like 'most', 'average', 'least' are a sign that you need to use an aggregation
