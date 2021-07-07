@@ -127,3 +127,30 @@ CREATE TABLE products (
 + Need to store a number without a decimal --> Mark the column as integer
 + Bank balance, grams of gold, scientific calculations --> Need to store a number with a decimal and this data needs to very accurate --> Mark the column as numeric
 + Kilograms of trash in a landfill, liters of water in a lake, air pressure in a tire --> Need to store a number with a decimal and the decimal doesn't make a big difference --> Mark the column as double precision
+
+### Numeric type
+
+- Numbers without any decimal points: smallint(-32768 to +32767), integer (...), bigint (...)
+
+- Number with decimal points: decimal(131072 digits before decimal point, 16383 after), numeric(same decimal), real (1E-37 to 1E37 with at least 6 places precision), double precision(...), float (same as real or double precision)
+
+- No decimal point, auto increment: serial (1 to 2147483647), smallserial (1 to 32767), bigserial (1 to 223372036854775807)
+
+Select (2.0::INTEGER); postgres will convert the numeric to integer
+
+select (1.99999::REAL - 1.99998::REAL)
+
+1.99999 - 1.99998 = 0.00001001358
+
+in the progresql world, the type real, double percision, float 
+
+these number type real, double precision, float do math and calculates more quickly than decimal and numeric
+
+### Character Types
+Char(5) --> Store some characters, length will always be 5 event if PG has to insert spaces
+varchar --> Store any length of strings
+varchar(40) --> Store a string up to 40 characters, automatically remove extra characters
+text --> Store any length of string
+
+
+lession 129
