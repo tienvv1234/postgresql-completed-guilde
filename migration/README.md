@@ -153,4 +153,86 @@ varchar(40) --> Store a string up to 40 characters, automatically remove extra c
 text --> Store any length of string
 
 
-lession 129
+### validate
+#### check
+ A check can onky work on the row we are adding/updating
+ price intefer Check (price >0)
+
+ lession 139 (phai xem lai)
+ ADD CHECK of
+ (
+	 COALESCE((post_id)::BOOLEAN::INTEGER, 0)
+	 +
+	 COALESCE((commemt_id)::BOOLEAN::INTEGER, 0)
+	 = 1
+ ) 
+
+### Performance with postgres
+- you can get away with quick tips and hints
+
+SHOW data_directory
+
+select oid, datname from pg_database
+
+select * from pg_class;
+
+Heap file 22445
+
+block or page 8kb
+
+tuple or item
+
+watch 182 183 192 lession again
+
+SELECT pg_size_pretty(pg_relation_size('index name'))
+
+B-Tree --> General purpose index 99% of the time you want this
+
+Hash --> Speeds up simple equality checks
+
+GiST --> Geometry full text search
+
+SP-GiST Clustered data such as dates 0 many rows might have the same year
+
+GIN --> For columns that contaon arrays or JSON data
+
+BRIN --> Specialized for really large datasets
+
+get all index in database
+Select relname, relkind from pg_class where relkind = 'i';
+
+Working definition for 'cost'
+
+Amount of time (seconds? milliseconds?) to execute some part of out query plan (not super accutrate, b ut good for now)
+
+Cost = (# pages read sequentially) * seq_page_cost(default 1.0) + (# Pages read at random) * randm_page_cost(4.0) + (# rows scanned) * cpu_tupte_cost(0.01) + (# index entries scanned) * cpu_index_tuple_cost(0.005) + (# times function/operator evaluated) * cou_operator_cost(0.0025)
+
+cost= 8.31..1756.11
+number 1 8.31
+cost for this step to produce the first row
+
+number 2 1756.11
+cost for this step to produce all rows
+
+# recursive CTE
+- data structure tree and graph
+
+# View from 213  materialized view to 224
+
+Big lession 1
+changes to database structure and changes to clients need to be made at precisely the same time
+Big lession 2
+when working with other engineers, we need a really easy way to tie the structure of our database to our code
+
+# mrigration
+database url env
+postgres://USERNAME:PASSWORD@localhost:5432/socialnetwork
+
+macos + git bass
+DATABASE_URL=postgres://USERNAME@localhost:5432/socialnetwork npm run migrate up
+
+cmd
+set DATABASE_URL=postgres://USERNAME@localhost:5432/socialnetwork&&npm run migrate up
+
+powershell
+$env:DATABASE_URL="postgres://USERNAME@localhost:5432/socialnetwork"; npm run migrate up
